@@ -1,0 +1,75 @@
+﻿@page
+@model NeetMama.Pages.Teachers.UploadBooksModel
+
+<h1>Upload Study Material</h1>
+
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="alert alert-success">
+        @Model.SuccessMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-danger">
+        @Model.Message
+    </div>
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label class="form-label">Document Title</label>
+        <input asp-for="UploadedBook.Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Subject</label>
+        <select asp-for="UploadedBook.Subject" class="form-control">
+            <option value="">Select Subject</option>
+            <option value="Biology">Biology</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Class Level</label>
+        <select asp-for="UploadedBook.ClassLevel" class="form-control">
+            <option value="">Select Class</option>
+            <option value="Class 11">Class 11</option>
+            <option value="Class 12">Class 12</option>
+            <option value="NEET Previous Paper">NEET Previous Paper</option>
+            <option value="Coaching Material">Coaching Material</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Document Type</label>
+        <select asp-for="UploadedBook.DocumentType" class="form-control">
+            <option value="">Select Type</option>
+            <option value="NCERT Textbook">NCERT Textbook</option>
+            <option value="Previous Year Paper">Previous Year Paper</option>
+            <option value="Answer Key">Answer Key</option>
+            <option value="Coaching Material">Coaching Material</option>
+            <option value="Teacher Notes">Teacher Notes</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Upload PDF</label>
+        <input type="file" name="PdfFile" class="form-control" accept=".pdf" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Upload
+    </button>
+
+    <a href="/Teachers/Dashboard" class="btn btn-secondary">
+        Back
+    </a>
+
+</form>

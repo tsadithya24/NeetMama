@@ -1,0 +1,36 @@
+﻿@page
+@model NeetMama.Pages.Teachers.QuestionBankModel
+
+<h1>Question Bank</h1>
+
+<hr />
+
+<a class="btn btn-primary mb-3" href="/Teachers/AddQuestion">
+    Add New Question
+</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Chapter</th>
+            <th>Topic</th>
+            <th>Question</th>
+            <th>Correct Answer</th>
+            <th>Difficulty</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in Model.Questions)
+        {
+            <tr>
+                <td>@question.Subject</td>
+                <td>@question.Chapter</td>
+                <td>@question.Topic</td>
+                <td>@question.QuestionText</td>
+                <td>@question.CorrectAnswer</td>
+                <td>@question.Difficulty</td>
+            </tr>
+        }
+    </tbody>
+</table>

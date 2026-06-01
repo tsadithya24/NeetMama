@@ -1,0 +1,71 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Publish folders
+publish/
+artifacts/
+
+# Logs
+*.log
+
+# SQL Server LocalDB files
+*.mdf
+*.ldf
+
+# Entity Framework generated DB
+App_Data/
+
+# User secrets
+secrets.json
+
+# NuGet packages
+packages/
+
+# ASP.NET generated files
+wwwroot/uploads/
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+
+# Node (future use)
+node_modules/
+
+# Python (future AI service)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ChromaDB (future)
+chroma/
+chromadb/
+
+# Ollama generated files
+ollama_data/
+
+# Environment files
+.env
+.env.local

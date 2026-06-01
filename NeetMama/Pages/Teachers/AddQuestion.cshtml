@@ -1,0 +1,79 @@
+﻿@page
+@model NeetMama.Pages.Teachers.AddQuestionModel
+
+<h1>Add New Question</h1>
+
+<hr />
+
+<form method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Subject</label>
+        <input asp-for="Question.Subject" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Chapter</label>
+        <input asp-for="Question.Chapter" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Topic</label>
+        <input asp-for="Question.Topic" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Question</label>
+        <textarea asp-for="Question.QuestionText" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Option A</label>
+        <input asp-for="Question.OptionA" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Option B</label>
+        <input asp-for="Question.OptionB" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Option C</label>
+        <input asp-for="Question.OptionC" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Option D</label>
+        <input asp-for="Question.OptionD" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Correct Answer</label>
+        <select asp-for="Question.CorrectAnswer" class="form-control">
+            <option value="">Select Answer</option>
+            <option value="A">Option A</option>
+            <option value="B">Option B</option>
+            <option value="C">Option C</option>
+            <option value="D">Option D</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Difficulty</label>
+        <select asp-for="Question.Difficulty" class="form-control">
+            <option value="">Select Difficulty</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Save Question
+    </button>
+
+    <a href="/Teachers/QuestionBank" class="btn btn-secondary">
+        Back
+    </a>
+
+</form>
