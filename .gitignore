@@ -69,3 +69,7 @@ ollama_data/
 # Environment files
 .env
 .env.local
+
+# Uploaded PDFs
+NeetMama/wwwroot/uploads/
+NeetMama/wwwroot/uploads/*
