@@ -73,3 +73,18 @@ ollama_data/
 # Uploaded PDFs
 NeetMama/wwwroot/uploads/
 NeetMama/wwwroot/uploads/*
+
+# Local user settings
+*.csproj.user
+
+# Visual Studio
+.vscode/
+
+# Future Python AI
+.venv/
+venv/
+__pycache__/
+
+# Future vector DB
+chroma/
+vector_db/
