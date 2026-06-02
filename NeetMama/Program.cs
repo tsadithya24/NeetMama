@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NeetMama.Data;
+using NeetMama.Services;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 
@@ -38,6 +39,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/Account/Logout";
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
+
+builder.Services.AddHttpClient<AIService>();
 
 var app = builder.Build();
 
