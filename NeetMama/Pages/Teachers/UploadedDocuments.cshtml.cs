@@ -55,5 +55,23 @@ namespace NeetMama.Pages.Teachers
 
             return RedirectToPage();
         }
+
+        public async Task<IActionResult> OnPostProcessAsync(int id)
+        {
+            var book = await _context.UploadedBooks
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (book == null)
+            {
+                return RedirectToPage();
+            }
+
+            book.IsProcessed = true;
+            book.ProcessedDate = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage();
+        }
     }
 }

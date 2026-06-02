@@ -1,4 +1,73 @@
 ﻿@page
 @model NeetMama.Pages.Students.AnalyticsModel
-@{
-}
+
+<h1>Performance Analytics</h1>
+
+<hr />
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Total Tests</h5>
+                <h2>@Model.TotalTestsTaken</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Average Score</h5>
+                <h2>@Model.AverageScore %</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Highest Score</h5>
+                <h2>@Model.HighestScore %</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Lowest Score</h5>
+                <h2>@Model.LowestScore %</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<h3 class="mt-4">Recent Test Results</h3>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Test Name</th>
+            <th>Subject</th>
+            <th>Score</th>
+            <th>Percentage</th>
+            <th>Completed On</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var result in Model.RecentResults)
+        {
+            <tr>
+                <td>@result.TestName</td>
+                <td>@result.Subject</td>
+                <td>@result.Score / @result.TotalQuestions</td>
+                <td>@result.Percentage %</td>
+                <td>@result.CompletedOn.ToString("dd-MMM-yyyy hh:mm tt")</td>
+            </tr>
+        }
+    </tbody>
+</table>

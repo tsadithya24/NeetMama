@@ -1,4 +1,100 @@
 ﻿@page
 @model NeetMama.Pages.Teachers.AnalyticsModel
-@{
-}
+
+<h1>Teacher Analytics</h1>
+
+<hr />
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Total Questions</h5>
+                <h2>@Model.TotalQuestions</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Total Tests</h5>
+                <h2>@Model.TotalTests</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Published Tests</h5>
+                <h2>@Model.PublishedTests</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Uploaded Documents</h5>
+                <h2>@Model.UploadedDocuments</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Student Attempts</h5>
+                <h2>@Model.TotalStudentAttempts</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Average Score</h5>
+                <h2>@Model.AverageScore %</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<h3 class="mt-4">Recent Tests</h3>
+
+<table class="table table-bordered table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Test Name</th>
+            <th>Subject</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Created Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var test in Model.RecentTests)
+        {
+            <tr>
+                <td>@test.TestName</td>
+                <td>@test.Subject</td>
+                <td>@test.DurationMinutes mins</td>
+                <td>
+                    @if (test.IsPublished)
+                    {
+                        <span class="badge bg-success">Published</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Draft</span>
+                    }
+                </td>
+                <td>@test.CreatedDate.ToString("dd-MMM-yyyy hh:mm tt")</td>
+            </tr>
+        }
+    </tbody>
+</table>

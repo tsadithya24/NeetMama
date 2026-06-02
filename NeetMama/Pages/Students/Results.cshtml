@@ -1,4 +1,53 @@
 ﻿@page
 @model NeetMama.Pages.Students.ResultsModel
-@{
+
+<h1>My Results</h1>
+
+<hr />
+
+@if (Model.Results.Count == 0)
+{
+    <div class="alert alert-info">
+        You have not taken any tests yet.
+    </div>
+
+    <a class="btn btn-primary" href="/Students/AvailableTests">
+        Go to Available Tests
+    </a>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Test Name</th>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Total Questions</th>
+                <th>Percentage</th>
+                <th>Completed On</th>
+                <th>Review</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var result in Model.Results)
+            {
+                <tr>
+                    <td>@result.TestName</td>
+                    <td>@result.Subject</td>
+                    <td>@result.Score</td>
+                    <td>@result.TotalQuestions</td>
+                    <td>@result.Percentage %</td>
+                    <td>@result.EndTime.ToString("dd-MMM-yyyy hh:mm tt")</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm"
+                           href="/Students/ResultDetails?id=@result.AttemptId">
+                            Review
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

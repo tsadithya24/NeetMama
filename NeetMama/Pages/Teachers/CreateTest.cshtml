@@ -1,4 +1,72 @@
 ﻿@page
 @model NeetMama.Pages.Teachers.CreateTestModel
-@{
-}
+
+<h1>Create Test</h1>
+
+<hr />
+
+<form method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Test Name</label>
+        <input asp-for="Test.TestName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Subject</label>
+        <select asp-for="Test.Subject" class="form-control">
+            <option value="">Select Subject</option>
+            <option value="Biology">Biology</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Full NEET Mock Test">Full NEET Mock Test</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Duration Minutes</label>
+        <input asp-for="Test.DurationMinutes" class="form-control" />
+    </div>
+
+    <h3>Select Questions</h3>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Subject</th>
+                <th>Chapter</th>
+                <th>Question</th>
+                <th>Difficulty</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var question in Model.Questions)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox"
+                               name="SelectedQuestionIds"
+                               value="@question.Id" />
+                    </td>
+                    <td>@question.Subject</td>
+                    <td>@question.Chapter</td>
+                    <td>@question.QuestionText</td>
+                    <td>@question.Difficulty</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-success">
+        Create Test
+    </button>
+
+    <a href="/Teachers/Dashboard" class="btn btn-secondary">
+        Back
+    </a>
+
+</form>

@@ -1,0 +1,52 @@
+﻿@page
+@model NeetMama.Pages.Students.ResultDetailsModel
+
+<h1>Test Review</h1>
+
+<hr />
+
+@foreach (var review in Model.Reviews)
+{
+    <div class="card mb-3">
+
+        <div class="card-body">
+
+            <h5>
+                @review.QuestionText
+            </h5>
+
+            <p>
+                <strong>Your Answer:</strong>
+                @review.StudentAnswer
+            </p>
+
+            <p>
+                <strong>Correct Answer:</strong>
+                @review.CorrectAnswer
+            </p>
+
+            @if (!string.IsNullOrWhiteSpace(review.Explanation))
+            {
+                <p>
+                    <strong>Explanation:</strong>
+                    @review.Explanation
+                </p>
+            }
+
+            @if (review.IsCorrect)
+            {
+                <span class="badge bg-success">
+                    Correct
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-danger">
+                    Incorrect
+                </span>
+            }
+
+        </div>
+
+    </div>
+}

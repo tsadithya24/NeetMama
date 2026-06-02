@@ -22,5 +22,9 @@ namespace NeetMama.Models
         public string FilePath { get; set; } = string.Empty;
 
         public DateTime UploadedDate { get; set; } = DateTime.Now;
+
+        public bool IsProcessed { get; set; } = false;
+
+        public DateTime? ProcessedDate { get; set; }
     }
 }

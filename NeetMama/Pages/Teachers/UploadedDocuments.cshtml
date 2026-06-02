@@ -20,6 +20,9 @@
             <th>Uploaded Date</th>
             <th>View</th>
             <th>Delete</th>
+            <th>Status</th>
+            <th>Processed Date</th>
+            <th>Process</th>
         </tr>
     </thead>
 
@@ -55,6 +58,39 @@
                         </button>
 
                     </form>
+                </td>
+                <td>
+                    @if (book.IsProcessed)
+                    {
+                        <span class="badge bg-success">Processed</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                </td>
+                <td>
+                    @(book.ProcessedDate.HasValue
+                                    ? book.ProcessedDate.Value.ToString("dd-MMM-yyyy hh:mm tt")
+                                    : "-")
+                </td>
+                <td>
+                @if (!book.IsProcessed)
+                    {
+                        <form method="post" asp-page-handler="Process">
+                            <input type="hidden" name="id" value="@book.Id" />
+
+                            <button type="submit" class="btn btn-sm btn-success">
+                                Process
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button class="btn btn-sm btn-secondary" disabled>
+                            Done
+                        </button>
+                    }
                 </td>
             </tr>
         }

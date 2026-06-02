@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NeetMama.Data;
 using NeetMama.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NeetMama.Pages.Teachers
 {
+    [Authorize(Roles = "Teacher,Admin")]
     public class AddQuestionModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -1,0 +1,59 @@
+﻿@page
+@model NeetMama.Pages.Teachers.ManageTestsModel
+
+<h1>Manage Tests</h1>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Test Name</th>
+            <th>Subject</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var test in Model.Tests)
+        {
+            <tr>
+
+                <td>@test.TestName</td>
+
+                <td>@test.Subject</td>
+
+                <td>@test.DurationMinutes mins</td>
+
+                <td>
+                    @(test.IsPublished ? "Published" : "Draft")
+                </td>
+
+                <td>
+
+                    @if (!test.IsPublished)
+                    {
+                        <form method="post"
+                              asp-page-handler="Publish">
+
+                            <input type="hidden"
+                                   name="id"
+                                   value="@test.Id" />
+
+                            <button class="btn btn-success">
+                                Publish
+                            </button>
+
+                        </form>
+                    }
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

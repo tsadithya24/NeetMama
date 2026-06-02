@@ -59,6 +59,13 @@
     </div>
 
     <div class="mb-3">
+        <label class="form-label">Explanation</label>
+        <textarea asp-for="Question.Explanation"
+                  class="form-control"
+                  rows="4"></textarea>
+    </div>
+
+    <div class="mb-3">
         <label class="form-label">Difficulty</label>
         <select asp-for="Question.Difficulty" class="form-control">
             <option value="">Select Difficulty</option>

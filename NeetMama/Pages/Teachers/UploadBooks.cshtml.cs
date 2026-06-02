@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NeetMama.Data;
 using NeetMama.Models;
 
+
 namespace NeetMama.Pages.Teachers
 {
+    [Authorize(Roles = "Teacher,Admin")]
     public class UploadBooksModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -40,6 +43,14 @@ namespace NeetMama.Pages.Teachers
             if (PdfFile == null || PdfFile.Length == 0)
             {
                 Message = "Please select a PDF file.";
+                return Page();
+            }
+
+            long maxFileSize = 500L * 1024L * 1024L;
+
+            if (PdfFile.Length > maxFileSize)
+            {
+                Message = "File size should not exceed 500 MB.";
                 return Page();
             }
 

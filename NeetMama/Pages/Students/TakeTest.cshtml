@@ -1,4 +1,164 @@
 ﻿@page
 @model NeetMama.Pages.Students.TakeTestModel
-@{
+
+<h1>@Model.Test?.TestName</h1>
+
+<div class="alert alert-warning text-center">
+    <h3>
+        Time Remaining:
+        <span id="timer"></span>
+    </h3>
+</div>
+<p>
+    <strong>Subject:</strong> @Model.Test?.Subject
+</p>
+
+<p>
+    <strong>Duration:</strong> @Model.Test?.DurationMinutes minutes
+</p>
+
+<hr />
+
+<form method="post">
+    <input type="hidden"
+           id="DurationTakenSeconds"
+           name="DurationTakenSeconds"
+           value="0" />
+
+    <input type="hidden"
+           id="SubmittedByTimer"
+           name="SubmittedByTimer"
+           value="false" />
+
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+        var question = Model.Questions[i];
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Question @(i + 1)</strong>
+            </div>
+
+            <div class="card-body">
+                <p>
+                    @question.QuestionText
+                </p>
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="Answers[@question.Id]"
+                           value="A" />
+                    <label class="form-check-label">
+                        A. @question.OptionA
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="Answers[@question.Id]"
+                           value="B" />
+                    <label class="form-check-label">
+                        B. @question.OptionB
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="Answers[@question.Id]"
+                           value="C" />
+                    <label class="form-check-label">
+                        C. @question.OptionC
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="radio"
+                           name="Answers[@question.Id]"
+                           value="D" />
+                    <label class="form-check-label">
+                        D. @question.OptionD
+                    </label>
+                </div>
+            </div>
+        </div>
+    }
+
+    <button type="submit"
+            class="btn btn-success"
+            onclick="return confirm('Submit test?');">
+        Submit Test
+    </button>
+
+    <a href="/Students/AvailableTests" class="btn btn-secondary">
+        Back
+    </a>
+
+</form>
+
+@section Scripts
+{
+    <script>
+        const testId = "@Model.Test?.Id";
+        const timerKey = "neetmama_timer_" + testId;
+
+        let totalSecondsFromServer = @(Model.DurationMinutes * 60);
+
+        let endTime = localStorage.getItem(timerKey);
+
+        if (!endTime) {
+            endTime = new Date().getTime() + totalSecondsFromServer * 1000;
+            localStorage.setItem(timerKey, endTime);
+        }
+
+        const timerElement = document.getElementById("timer");
+        const durationTakenElement = document.getElementById("DurationTakenSeconds");
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            let remainingMilliseconds = endTime - now;
+            let totalSeconds = Math.floor(remainingMilliseconds / 1000);
+
+            if (totalSeconds < 0) {
+                totalSeconds = 0;
+            }
+
+            let usedSeconds = totalSecondsFromServer - totalSeconds;
+
+            if (usedSeconds < 0) {
+                usedSeconds = 0;
+            }
+
+            durationTakenElement.value = usedSeconds;
+
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+
+            timerElement.innerText =
+                minutes.toString().padStart(2, '0') +
+                ":" +
+                seconds.toString().padStart(2, '0');
+
+            if (totalSeconds <= 0) {
+                document.getElementById("SubmittedByTimer").value = "true";
+                localStorage.removeItem(timerKey);
+
+                alert("Time is up. Test will be submitted.");
+                document.forms[0].submit();
+                return;
+            }
+        }
+
+        updateTimer();
+
+        const timerInterval = setInterval(updateTimer, 1000);
+
+        document.forms[0].addEventListener("submit", function () {
+            localStorage.removeItem(timerKey);
+            clearInterval(timerInterval);
+        });
+    </script>
 }

@@ -22,6 +22,8 @@
 
         public string CorrectAnswer { get; set; } = string.Empty;
 
+        public string Explanation { get; set; } = string.Empty;
+
         public string Difficulty { get; set; } = string.Empty;
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
