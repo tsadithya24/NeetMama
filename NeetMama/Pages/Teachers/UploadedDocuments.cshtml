@@ -4,7 +4,19 @@
 <h1>Uploaded Documents</h1>
 
 <hr />
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <a class="btn btn-primary mb-3" href="/Teachers/UploadBooks">
     Upload New Document
 </a>
