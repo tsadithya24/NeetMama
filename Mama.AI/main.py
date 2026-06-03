@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-
+from services.chunk_service import chunk_text
 from services.pdf_service import extract_text_from_pdf
 
 
@@ -32,4 +32,11 @@ def health():
 @app.post("/extract-pdf-text")
 def extract_pdf_text(request: PdfProcessRequest):
     result = extract_text_from_pdf(request.file_path)
+
+    if result.get("success"):
+        chunks = chunk_text(result.get("full_text", ""))
+
+        result["chunk_count"] = len(chunks)
+        result["chunks"] = chunks
+
     return result
