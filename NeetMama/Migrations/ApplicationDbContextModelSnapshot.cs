@@ -224,6 +224,35 @@ namespace NeetMama.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("NeetMama.Models.DocumentChunk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChunkLength")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ChunkNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ChunkText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UploadedBookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentChunks");
+                });
+
             modelBuilder.Entity("NeetMama.Models.Question", b =>
                 {
                     b.Property<int>("Id")

@@ -87,13 +87,36 @@ namespace NeetMama.Pages.Teachers
                 return RedirectToPage();
             }
 
+            var existingChunks = _context.DocumentChunks
+                .Where(c => c.UploadedBookId == book.Id);
+
+            _context.DocumentChunks.RemoveRange(existingChunks);
+
+            foreach (var chunk in result.Chunks)
+            {
+                _context.DocumentChunks.Add(new DocumentChunk
+                {
+                    UploadedBookId = book.Id,
+                    ChunkNumber = chunk.Chunk_Number,
+                    ChunkText = chunk.Text,
+                    ChunkLength = chunk.Length,
+                    CreatedDate = DateTime.Now
+                });
+            }
+
+            await _aiService.StoreChunksAsync(
+            book.Id,
+            book.Title,
+            book.Subject,
+            result.Chunks);
+
             book.IsProcessed = true;
             book.ProcessedDate = DateTime.Now;
 
             await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] =
-                $"PDF processed successfully. Pages: {result.Page_Count}, Text length: {result.Text_Length}";
+                $"PDF processed successfully. Pages: {result.Page_Count}, Text length: {result.Text_Length}, Chunks: {result.Chunk_Count}";
 
             return RedirectToPage();
         }

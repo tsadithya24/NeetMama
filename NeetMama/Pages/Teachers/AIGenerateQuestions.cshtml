@@ -1,0 +1,60 @@
+﻿@page
+@model NeetMama.Pages.Teachers.AIGenerateQuestionsModel
+
+<h1>AI Question Generator</h1>
+
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+
+<form method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Subject</label>
+        <select asp-for="Input.Subject" class="form-control">
+            <option value="">Select Subject</option>
+            <option value="Biology">Biology</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Topic</label>
+        <input asp-for="Input.Topic"
+               class="form-control"
+               placeholder="Example: Human Reproduction Fertilisation zona pellucida acrosome" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Difficulty</label>
+        <select asp-for="Input.Difficulty" class="form-control">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Number of Questions</label>
+        <input asp-for="Input.Count"
+               class="form-control"
+               type="number"
+               min="1"
+               max="20" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Generate and Save Questions
+    </button>
+
+    <a href="/Teachers/QuestionBank" class="btn btn-secondary">
+        View Question Bank
+    </a>
+
+</form>

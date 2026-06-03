@@ -27,5 +27,7 @@ namespace NeetMama.Data
         public DbSet<StudentTestAttempt> StudentTestAttempts { get; set; }
 
         public DbSet<StudentAnswer> StudentAnswers { get; set; }
+
+        public DbSet<DocumentChunk> DocumentChunks { get; set; }
     }
 }
