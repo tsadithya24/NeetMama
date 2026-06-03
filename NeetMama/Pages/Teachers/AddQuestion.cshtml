@@ -23,6 +23,18 @@
     </div>
 
     <div class="mb-3">
+        <label class="form-label">Question Type</label>
+        <select asp-for="Question.QuestionType" class="form-control">
+            <option value="MCQ">MCQ</option>
+            <option value="FillBlank">Fill in the Blank</option>
+            <option value="AssertionReason">Assertion Reason</option>
+            <option value="ScientistFact">Scientist / Experiment</option>
+            <option value="ReactionBased">Reaction Based</option>
+            <option value="DiagramBased">Diagram Based</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
         <label class="form-label">Question</label>
         <textarea asp-for="Question.QuestionText" class="form-control" rows="4"></textarea>
     </div>

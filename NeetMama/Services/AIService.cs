@@ -106,11 +106,52 @@ namespace NeetMama.Services
                 });
         }
 
+        public async Task<AIFlashCardResponse?> GenerateFlashCardsAsync(
+            string subject,
+            string topic,
+            string cardType,
+            int count)
+        {
+            string baseUrl = _configuration["AISettings:BaseUrl"]!;
+
+            var payload = new
+            {
+                subject,
+                topic,
+                card_type = cardType,
+                count,
+                top_k = 3
+            };
+
+            string json = JsonSerializer.Serialize(payload);
+
+            var content = new StringContent(
+                json,
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await _httpClient.PostAsync(
+                $"{baseUrl}/generate-flashcards",
+                content);
+
+            response.EnsureSuccessStatusCode();
+
+            string responseJson = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<AIFlashCardResponse>(
+                responseJson,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+        }
+
         public async Task<AIQuestionResponse?> GenerateQuestionsAsync(
-    string subject,
-    string topic,
-    string difficulty,
-    int count)
+            string subject,
+            string topic,
+            string difficulty,
+            string questionType,
+            int count)
         {
             string baseUrl =
                 _configuration["AISettings:BaseUrl"]!;
@@ -120,6 +161,7 @@ namespace NeetMama.Services
                 subject,
                 topic,
                 difficulty,
+                question_type = questionType,
                 count,
                 top_k = 3
             };
@@ -150,7 +192,6 @@ namespace NeetMama.Services
                 });
         }
     }
-
     public class PdfExtractResponse
     {
         public bool Success { get; set; }

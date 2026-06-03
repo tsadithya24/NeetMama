@@ -29,5 +29,7 @@ namespace NeetMama.Data
         public DbSet<StudentAnswer> StudentAnswers { get; set; }
 
         public DbSet<DocumentChunk> DocumentChunks { get; set; }
+
+        public DbSet<FlashCard> FlashCards { get; set; }
     }
 }

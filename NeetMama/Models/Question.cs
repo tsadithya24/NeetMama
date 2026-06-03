@@ -27,5 +27,7 @@
         public string Difficulty { get; set; } = string.Empty;
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+        public string QuestionType { get; set; } = "MCQ";
     }
 }

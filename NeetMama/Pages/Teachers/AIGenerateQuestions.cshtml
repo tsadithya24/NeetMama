@@ -32,6 +32,33 @@
     </div>
 
     <div class="mb-3">
+        <label class="form-label">Question Type</label>
+
+        <select asp-for="Input.QuestionType"
+                class="form-control">
+
+            <option value="MCQ">MCQ</option>
+
+            <option value="FillBlank">
+                Fill in the Blank
+            </option>
+
+            <option value="ScientistFact">
+                Scientist / Experiment
+            </option>
+
+            <option value="AssertionReason">
+                Assertion Reason
+            </option>
+
+            <option value="ReactionBased">
+                Reaction Based
+            </option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
         <label class="form-label">Difficulty</label>
         <select asp-for="Input.Difficulty" class="form-control">
             <option value="Easy">Easy</option>

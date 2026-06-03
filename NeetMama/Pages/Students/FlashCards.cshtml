@@ -1,0 +1,30 @@
+﻿@page
+@model NeetMama.Pages.Students.FlashCardsModel
+
+<h1>Flash Cards</h1>
+
+<hr />
+
+<a class="btn btn-success mb-3" href="/Teachers/AIGenerateFlashCards">
+    Generate Flash Cards
+</a>
+
+<div class="row">
+    @foreach (var card in Model.FlashCards)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card shadow h-100">
+                <div class="card-header">
+                    <strong>@card.Subject</strong> - @card.CardType
+                </div>
+
+                <div class="card-body">
+                    <h5>@card.FrontText</h5>
+                    <hr />
+                    <p>@card.BackText</p>
+                    <small class="text-muted">@card.Topic</small>
+                </div>
+            </div>
+        </div>
+    }
+</div>

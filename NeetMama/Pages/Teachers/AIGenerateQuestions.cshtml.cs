@@ -41,11 +41,13 @@ namespace NeetMama.Pages.Teachers
                 return Page();
             }
 
-            var result = await _aiService.GenerateQuestionsAsync(
-                Input.Subject,
-                Input.Topic,
-                Input.Difficulty,
-                Input.Count);
+            var result =
+                await _aiService.GenerateQuestionsAsync(
+                    Input.Subject,
+                    Input.Topic,
+                    Input.Difficulty,
+                    Input.QuestionType,
+                    Input.Count);
 
             if (result == null || !result.Success || result.Questions.Count == 0)
             {
@@ -60,6 +62,7 @@ namespace NeetMama.Pages.Teachers
                     Subject = Input.Subject,
                     Chapter = Input.Topic,
                     Topic = Input.Topic,
+                    QuestionType = Input.QuestionType,
                     QuestionText = generated.Question,
                     OptionA = generated.OptionA,
                     OptionB = generated.OptionB,
