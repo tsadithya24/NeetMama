@@ -1,0 +1,31 @@
+﻿@page
+@model NeetMama.Pages.Students.MyAnalyticsModel
+
+<h1>My Analytics</h1>
+
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Topic</th>
+            <th>Total Attempts</th>
+            <th>Incorrect</th>
+            <th>Accuracy (%)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var topic in Model.WeakTopics)
+        {
+            <tr>
+                <td>@topic.Subject</td>
+                <td>@topic.Topic</td>
+                <td>@topic.TotalAttempts</td>
+                <td>@topic.IncorrectCount</td>
+                <td>@topic.Accuracy</td>
+            </tr>
+        }
+    </tbody>
+</table>

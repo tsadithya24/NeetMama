@@ -31,6 +31,52 @@ namespace NeetMama.Pages.Students
         [BindProperty]
         public bool SubmittedByTimer { get; set; }
 
+        private async Task UpdateWeakTopicAsync(
+            string studentEmail,
+            string subject,
+            string topic,
+            bool isCorrect)
+        {
+            var weakTopic = await _context.StudentWeakTopics
+                .FirstOrDefaultAsync(w =>
+                    w.StudentEmail == studentEmail &&
+                    w.Subject == subject &&
+                    w.Topic == topic);
+
+            if (weakTopic == null)
+            {
+                weakTopic = new StudentWeakTopic
+                {
+                    StudentEmail = studentEmail,
+                    Subject = subject,
+                    Topic = topic,
+                    IncorrectCount = isCorrect ? 0 : 1,
+                    TotalAttempts = 1,
+                    Accuracy = isCorrect ? 100 : 0,
+                    LastUpdated = DateTime.Now
+                };
+
+                _context.StudentWeakTopics.Add(weakTopic);
+            }
+            else
+            {
+                weakTopic.TotalAttempts++;
+
+                if (!isCorrect)
+                {
+                    weakTopic.IncorrectCount++;
+                }
+
+                int correctCount =
+                    weakTopic.TotalAttempts - weakTopic.IncorrectCount;
+
+                weakTopic.Accuracy =
+                    Math.Round((double)correctCount / weakTopic.TotalAttempts * 100, 2);
+
+                weakTopic.LastUpdated = DateTime.Now;
+            }
+        }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Test = await _context.Tests.FirstOrDefaultAsync(t => t.Id == id && t.IsPublished);
@@ -95,12 +141,18 @@ namespace NeetMama.Pages.Students
             {
                 string selectedAnswer = "";
 
+
                 if (Answers.ContainsKey(question.Id))
                 {
                     selectedAnswer = Answers[question.Id];
                 }
 
                 bool isCorrect = selectedAnswer == question.CorrectAnswer;
+                await UpdateWeakTopicAsync(
+                    User.Identity?.Name ?? string.Empty,
+                    question.Subject,
+                    question.Topic,
+                    isCorrect);
 
                 if (isCorrect)
                 {

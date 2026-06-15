@@ -1,0 +1,26 @@
+﻿@page
+@model NeetMama.Pages.Students.GenerateMyFlashCardsModel
+
+<h1>Generate My Flash Cards</h1>
+
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+
+<form method="post">
+
+    <p>
+        Generate revision flash cards from your weakest topic.
+    </p>
+
+    <button type="submit"
+            class="btn btn-success">
+        Generate My Flash Cards
+    </button>
+
+</form>

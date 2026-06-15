@@ -17,5 +17,9 @@
         public string CardType { get; set; } = "Concept";
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+        public string CreatedBy { get; set; } = string.Empty;
+
+        public string StudentEmail { get; set; } = string.Empty;
     }
 }

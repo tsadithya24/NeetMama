@@ -20,8 +20,15 @@ namespace NeetMama.Pages.Students
 
         public async Task OnGetAsync()
         {
+            string studentEmail =
+                User.Identity?.Name ?? "";
+
             FlashCards = await _context.FlashCards
-                .OrderByDescending(f => f.CreatedDate)
+                .Where(x =>
+                    string.IsNullOrEmpty(x.StudentEmail)
+                    ||
+                    x.StudentEmail == studentEmail)
+                .OrderByDescending(x => x.CreatedDate)
                 .ToListAsync();
         }
     }

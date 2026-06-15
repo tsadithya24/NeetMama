@@ -107,10 +107,10 @@ namespace NeetMama.Services
         }
 
         public async Task<AIFlashCardResponse?> GenerateFlashCardsAsync(
-            string subject,
-            string topic,
-            string cardType,
-            int count)
+        string subject,
+        string topic,
+        string cardType,
+        int count)
         {
             string baseUrl = _configuration["AISettings:BaseUrl"]!;
 
@@ -134,9 +134,13 @@ namespace NeetMama.Services
                 $"{baseUrl}/generate-flashcards",
                 content);
 
-            response.EnsureSuccessStatusCode();
-
             string responseJson = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(
+                    $"Mama.AI error: {response.StatusCode}. Details: {responseJson}");
+            }
 
             return JsonSerializer.Deserialize<AIFlashCardResponse>(
                 responseJson,

@@ -31,5 +31,7 @@ namespace NeetMama.Data
         public DbSet<DocumentChunk> DocumentChunks { get; set; }
 
         public DbSet<FlashCard> FlashCards { get; set; }
+
+        public DbSet<StudentWeakTopic> StudentWeakTopics { get; set; }
     }
 }
